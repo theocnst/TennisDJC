@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TennisBall : MonoBehaviour
 {
-    private Vector3 initialBallPosition;
+    private Vector3 initialBallPosition; // Initial position of the ball
 
     void Start()
     {
-        initialBallPosition = transform.position;
+        initialBallPosition = transform.position; // Save the initial position of the ball
     }
 
     private void OnCollisionEnter(Collision collision)

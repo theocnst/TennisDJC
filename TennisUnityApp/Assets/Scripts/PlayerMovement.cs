@@ -12,12 +12,10 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform ball;
     Animator animator;
-    Vector3 aimTargetInitialPosition;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        aimTargetInitialPosition = aimTarget.position;
     }
 
     void Update()
@@ -63,7 +61,5 @@ public class PlayerMovement : MonoBehaviour
             else
                 animator.Play("backhand");
         }
-
-        aimTarget.position = aimTargetInitialPosition;
     }
 }

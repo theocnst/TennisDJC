@@ -5,7 +5,7 @@ public class AimTarget : MonoBehaviour
     private Vector3 initialTargetPosition; // Initial position of the ball
 
     public float moveDistance = 2.5f; // Distance to move along the X-axis
-    public float moveSpeed = 3.0f; // Speed of the movement
+    public float moveSpeed = 1.0f; // Speed of the movement
     private bool movingForward = true; // Direction of movement
 
     void Start()

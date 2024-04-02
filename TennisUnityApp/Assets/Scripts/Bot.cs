@@ -13,15 +13,12 @@ public class Bot : MonoBehaviour
     public Transform aimTarget;
 
     Vector3 targetPosition;
-    Vector3 aimTargetInitialPosition;
-
 
     // Start is called before the first frame update
     void Start()
     {
         targetPosition = transform.position;
         animator = GetComponent<Animator>();
-        aimTargetInitialPosition = aimTarget.position;
     }
 
     // Update is called once per frame
@@ -49,7 +46,5 @@ public class Bot : MonoBehaviour
             else
                 animator.Play("backhand");
         }
-
-        aimTarget.position = aimTargetInitialPosition;
     }
 }

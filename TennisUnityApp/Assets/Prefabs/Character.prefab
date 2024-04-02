@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimTarget: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!1001 &4689167324304890158
 PrefabInstance:
   m_ObjectHideFlags: 0

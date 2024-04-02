@@ -10,6 +10,14 @@ public class PlayerMovement : MonoBehaviour
 
     bool hitting;
 
+    public Transform ball;
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -33,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime);
         }
+
+        Vector3 ballDir = ball.position - transform.position;
+
+        Debug.DrawRay(transform.position, ballDir);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,6 +53,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 dir = aimTarget.position - transform.position;
             other.GetComponent<Rigidbody>().velocity = dir.normalized * force + new Vector3(0, 5, 0);
+
+            Vector3 ballDir = ball.position - transform.position;
+
+            if (ballDir.z >= 0)
+                animator.Play("forehand");
+            else
+                animator.Play("backhand");
         }
     }
 }

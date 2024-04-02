@@ -1124,6 +1124,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1256566711627072375, guid: 7715537f000f06a4dbbc37678a9ddcf3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1868824313}
+    - targetCorrespondingSourceObject: {fileID: 1256566711627072375, guid: 7715537f000f06a4dbbc37678a9ddcf3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1868824314}
     - targetCorrespondingSourceObject: {fileID: 8829925760245484381, guid: 7715537f000f06a4dbbc37678a9ddcf3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1593607589}
@@ -1154,6 +1157,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1868824314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868824312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eab58d194c466045935d959b837cb4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topSpin:
+    upForce: 7
+    hitForce: 10
+  flat:
+    upForce: 4
+    hitForce: 20
 --- !u!4 &1933837300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1526075893526945799, guid: 6b36ec91c37c37f4baf341301f0296b6, type: 3}
@@ -1314,7 +1335,7 @@ GameObject:
   - component: {fileID: 2073355183}
   m_Layer: 0
   m_Name: NetCenter
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

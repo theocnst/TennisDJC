@@ -14,11 +14,16 @@ public class Bot : MonoBehaviour
 
     Vector3 targetPosition;
 
+    public Transform[] targets;
+
+    ShotManager shotManager;
+
     // Start is called before the first frame update
     void Start()
     {
         targetPosition = transform.position;
         animator = GetComponent<Animator>();
+        shotManager = GetComponent<ShotManager>();
     }
 
     // Update is called once per frame
@@ -27,16 +32,32 @@ public class Bot : MonoBehaviour
         Move();
     }
 
+    Vector3 PickTarget()
+    {
+        int randomValue = Random.Range(0, targets.Length);
+        return targets[randomValue].position;
+    }
+
+    Shot PickShot()
+    {
+        int randomValue = Random.Range(0, 2);
+        if (randomValue == 0)
+            return shotManager.topSpin;
+        else
+            return shotManager.flat;
+    }
+
     void Move()
     {
         targetPosition.x = ball.position.x;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("TennisBall"))
         {
-            Vector3 dir = aimTarget.position - transform.position;
+            Vector3 dir = PickTarget() - transform.position;
             other.GetComponent<Rigidbody>().velocity = dir.normalized * force + new Vector3(0, 6, 0);
 
             Vector3 ballDir = ball.position - transform.position;

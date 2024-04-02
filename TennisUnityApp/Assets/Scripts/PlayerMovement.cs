@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public Transform aimTarget;
     float speed = 3f;
-    float force = 13f;
 
     bool hitting;
 

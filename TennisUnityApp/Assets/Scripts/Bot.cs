@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bot : MonoBehaviour
 {
     float speed = 3f;
-    float force = 13f;
 
     Animator animator;
 
@@ -18,7 +17,6 @@ public class Bot : MonoBehaviour
 
     ShotManager shotManager;
 
-    // Start is called before the first frame update
     void Start()
     {
         targetPosition = transform.position;
@@ -26,7 +24,6 @@ public class Bot : MonoBehaviour
         shotManager = GetComponent<ShotManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -55,10 +52,12 @@ public class Bot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Shot currentShot = PickShot();
+
         if (other.CompareTag("TennisBall"))
         {
             Vector3 dir = PickTarget() - transform.position;
-            other.GetComponent<Rigidbody>().velocity = dir.normalized * force + new Vector3(0, 6, 0);
+            other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
 
             Vector3 ballDir = ball.position - transform.position;
 

@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AimTarget : MonoBehaviour
 {
     private Vector3 initialTargetPosition; // Initial position of the ball
 
-    public float moveDistance = 2.5f; // Distance to move along the Z-axis
-    public float moveSpeed = 1.0f; // Speed of the movement
+    public float moveDistance = 2.5f; // Distance to move along the X-axis
+    public float moveSpeed = 3.0f; // Speed of the movement
     private bool movingForward = true; // Direction of movement
 
     void Start()
@@ -19,21 +17,22 @@ public class AimTarget : MonoBehaviour
     {
         // Calculate the current movement direction and distance
         float step = moveSpeed * Time.deltaTime;
+
         if (movingForward)
         {
-            transform.position += new Vector3(0, 0, step);
+            transform.position += new Vector3(step, 0, 0);
         }
         else
         {
-            transform.position -= new Vector3(0, 0, step);
+            transform.position -= new Vector3(step, 0, 0);
         }
 
         // Check if the ball has reached the specified move distance from the initial position
-        if (movingForward && transform.position.z >= initialTargetPosition.z + moveDistance)
+        if (movingForward && transform.position.x >= initialTargetPosition.x + moveDistance)
         {
             movingForward = false; // Change direction
         }
-        else if (!movingForward && transform.position.z <= initialTargetPosition.z - moveDistance)
+        else if (!movingForward && transform.position.x <= initialTargetPosition.x - moveDistance)
         {
             movingForward = true; // Change direction
         }

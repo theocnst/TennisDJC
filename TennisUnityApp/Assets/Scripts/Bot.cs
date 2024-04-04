@@ -65,6 +65,9 @@ public class Bot : MonoBehaviour
                 animator.Play("forehand");
             else
                 animator.Play("backhand");
+
+            ball.GetComponent<TennisBall>().hitter = "Bot";
+
         }
     }
 }

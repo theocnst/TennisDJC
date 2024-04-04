@@ -32,6 +32,7 @@ public class PlayerHitting : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.F) || Input.GetKeyUp(KeyCode.E))
         {
             IsHitting = false;
+            ball.GetComponent<TennisBall>().hitter = "Character";
         }
 
         if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.T))
@@ -50,6 +51,8 @@ public class PlayerHitting : MonoBehaviour
             ball.transform.position = transform.position + new Vector3(0.2f, 1, 0);
             Vector3 dir = aimTarget.position - transform.position;
             ball.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
+            ball.GetComponent<TennisBall>().hitter = "Character";
+            ball.GetComponent<TennisBall>().playing = true;
             playerAnimation.PlayServeAnimation();
         }
 
@@ -71,6 +74,8 @@ public class PlayerHitting : MonoBehaviour
                 playerAnimation.PlayForehandAnimation();
             else
                 playerAnimation.PlayBackhandAnimation();
+
+            ball.GetComponent<TennisBall>().hitter = "Character";
         }
     }
 

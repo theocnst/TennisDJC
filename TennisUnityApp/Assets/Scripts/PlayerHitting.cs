@@ -34,16 +34,20 @@ public class PlayerHitting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.T))
         {
             IsHitting = true;
+            var playerAnimation = GetComponent<PlayerAnimation>();
             currentShot = Input.GetKeyDown(KeyCode.R) ? shotManager.flatServe : shotManager.kickServe;
             aimTarget.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * 3f * 2 * Time.deltaTime);
+            playerAnimation.PlayServePrepareAnimation();
         }
 
         if (Input.GetKeyUp(KeyCode.R) || Input.GetKeyUp(KeyCode.T))
         {
             IsHitting = false;
+            var playerAnimation = GetComponent<PlayerAnimation>();
             ball.transform.position = transform.position + new Vector3(0.2f, 1, 0);
             Vector3 dir = aimTarget.position - transform.position;
             ball.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
+            playerAnimation.PlayServeAnimation();
         }
 
 

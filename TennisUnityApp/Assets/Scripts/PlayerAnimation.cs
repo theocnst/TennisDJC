@@ -18,4 +18,14 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.Play("backhand");
     }
+
+    public void PlayServeAnimation()
+    {
+        animator.Play("serve");
+    }
+
+    public void PlayServePrepareAnimation()
+    {
+        animator.Play("serve-prepare");
+    }
 }

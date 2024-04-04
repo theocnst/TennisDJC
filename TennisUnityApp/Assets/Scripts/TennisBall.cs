@@ -16,7 +16,9 @@ public class TennisBall : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
-            transform.position = initialBallPosition;
+            //transform.position = initialBallPosition;
+
+            GameObject.Find("Character").GetComponent<PlayerHitting>().Reset();
         }
     }
 }

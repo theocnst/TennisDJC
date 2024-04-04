@@ -8,6 +8,9 @@ public class PlayerHitting : MonoBehaviour
     public bool IsHitting { get; private set; }
     ShotManager shotManager;
     Shot currentShot;
+    [SerializeField] Transform serveLeft;
+    [SerializeField] Transform serveRight;
+    public bool isServingLeft = true;
 
     private void Start()
     {
@@ -69,5 +72,15 @@ public class PlayerHitting : MonoBehaviour
             else
                 playerAnimation.PlayBackhandAnimation();
         }
+    }
+
+    public void Reset()
+    {
+        if (isServingLeft)
+            transform.position = serveLeft.position;
+        else
+            transform.position = serveRight.position;
+        
+        isServingLeft = !isServingLeft;
     }
 }

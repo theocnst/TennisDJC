@@ -21,7 +21,13 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField]
     private bool use24Clock = true;
     [SerializeField]
+    private float _timeWhenTurnOnLights = 16f;
+    [SerializeField]
+    private float _timeWhenTurnOffLights = 9f;
+    [SerializeField]
     private TextMeshProUGUI clockText;
+    [SerializeField]
+    private TextMeshProUGUI daysPassedText; // Text for displaying days passed
     [SerializeField]
     [Range(0f, 1f)]
     private float _timeOfDay;
@@ -95,6 +101,7 @@ public class DayNightCycle : MonoBehaviour
     private void Start()
     {
         NormalTimeCurve();
+        UpdateDaysPassedText(); // Initial update for day count display
     }
 
     private void Update()
@@ -115,8 +122,8 @@ public class DayNightCycle : MonoBehaviour
 
     private void UpdateLights()
     {
-        float turnOnTime = 17f / 24f;  // 5 PM as a fraction of 24 hours
-        float turnOffTime = 7f / 24f;  // 7 AM as a fraction of 24 hours
+        float turnOnTime = _timeWhenTurnOnLights / 24f;  // 5 PM as a fraction of 24 hours
+        float turnOffTime = _timeWhenTurnOffLights / 24f;  // 7 AM as a fraction of 24 hours
 
         // Determine if lights should be on based on current _timeOfDay
         bool shouldBeOn = (_timeOfDay >= turnOnTime || _timeOfDay < turnOffTime);
@@ -157,6 +164,7 @@ public class DayNightCycle : MonoBehaviour
             elapsedTime = 0;
             _dayNumber++;
             _timeOfDay -= 1;
+            UpdateDaysPassedText(); // Update day count display when the day changes
 
             if (_dayNumber > _yearLength) //new year!
             {
@@ -164,6 +172,14 @@ public class DayNightCycle : MonoBehaviour
                 _dayNumber = 0;
             }
         }
+    }
+
+    private void UpdateDaysPassedText()
+    {
+        if (_yearNumber == 0)
+            daysPassedText.text = $"- day {_dayNumber + 1} - ";
+        else
+            daysPassedText.text = $" - day {_dayNumber + 1} | year {_yearNumber + 1} -";
     }
 
     private void UpdateClock()

@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Out
   - Character
+  - PlayerGround
+  - BotGround
   layers:
   - Default
   - TransparentFX

@@ -167,7 +167,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27219452}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fd4eaf90c5c55fe42b21e9e0622425c2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -826,7 +826,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996021221}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fd4eaf90c5c55fe42b21e9e0622425c2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -839,7 +839,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.3288999, y: 1, z: 0.5165294}
-  m_Center: {x: -1.188013, y: 0, z: -0.015475491}
+  m_Center: {x: -1.188013, y: -0.61, z: -0.015475491}
 --- !u!4 &996660072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7984063792966400499, guid: 73b5c6d2ca998964795e5f94d8b229d2, type: 3}
@@ -961,13 +961,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060835063}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15592897, y: -0.004300669, z: 0.00067846105, w: 0.9877587}
-  m_LocalPosition: {x: 1.75, y: 5.64, z: -13.48}
+  m_LocalRotation: {x: 0.15159212, y: 0.23138444, z: -0.036527116, w: 0.9602848}
+  m_LocalPosition: {x: -4.45, y: 5.64, z: -11.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 17.942, y: -0.499, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.942, y: 27.095, z: 0}
 --- !u!1 &1092327784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1111,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181900771}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fd4eaf90c5c55fe42b21e9e0622425c2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1298,7 +1298,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331732373}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fd4eaf90c5c55fe42b21e9e0622425c2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1645,7 +1645,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636688467}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fd4eaf90c5c55fe42b21e9e0622425c2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1658,7 +1658,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.3288999, y: 1, z: 0.5165294}
-  m_Center: {x: -1.188013, y: 0, z: -0.015475491}
+  m_Center: {x: -1.188013, y: -0.66, z: -0.015475491}
 --- !u!1 &1641908251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1698,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641908251}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fd4eaf90c5c55fe42b21e9e0622425c2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2178,18 +2178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eab58d194c466045935d959b837cb4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topSpin:
-    upForce: 8
-    hitForce: 8
-  flat:
-    upForce: 5
-    hitForce: 20
-  flatServe:
-    upForce: 0.1
-    hitForce: 24
-  kickServe:
-    upForce: 2.5
-    hitForce: 24
 --- !u!114 &1868824322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2789,7 +2777,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TennisGround
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3227599778441950687, guid: 35b51addbb5f6d84281b99b0f1d70714, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5343535649003941162, guid: 35b51addbb5f6d84281b99b0f1d70714, type: 3}
@@ -2962,6 +2951,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3222149618470137135, guid: 348d2b7340ce3aa4396af776b17584bf, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: fd4eaf90c5c55fe42b21e9e0622425c2, type: 2}
     - target: {fileID: 3222149618470137135, guid: 348d2b7340ce3aa4396af776b17584bf, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -3325,18 +3318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eab58d194c466045935d959b837cb4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topSpin:
-    upForce: 8
-    hitForce: 8
-  flat:
-    upForce: 5
-    hitForce: 20
-  flatServe:
-    upForce: 0.1
-    hitForce: 24
-  kickServe:
-    upForce: 2.5
-    hitForce: 24
 --- !u!4 &8135266234679313530
 Transform:
   m_ObjectHideFlags: 0

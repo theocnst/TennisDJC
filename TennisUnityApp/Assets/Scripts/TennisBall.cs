@@ -92,11 +92,20 @@ public class TennisBall : MonoBehaviour
             {
                 if (hitter == "Character")
                 {
-                    botScore++;
+                    if (characterBounceCount == 1)
+                    { 
+                        characterScore++;
+                    }
+                    else botScore++;
                 }
                 else if (hitter == "Bot")
                 {
-                    characterScore++;
+
+                    if (botBounceCount == 1)
+                    {
+                        botScore++;
+                    }
+                    else characterScore++;
                 }
 
                 playing = false;

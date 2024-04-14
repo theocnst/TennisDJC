@@ -48,7 +48,7 @@ public class PlayerHitting : MonoBehaviour
         if (IsHitting)
         {
             var playerAnimation = GetComponent<PlayerAnimation>();
-            currentShot = Input.GetKeyDown(KeyCode.R) ? shotManager.flatServe : shotManager.kickServe;
+            currentShot = Input.GetKeyDown(KeyCode.R) ? shotManager.flatServe : shotManager.topSpinServe;
             aimTarget.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * 6f * Time.deltaTime);
             playerAnimation.PlayServePrepareAnimation();
         }
@@ -82,7 +82,7 @@ public class PlayerHitting : MonoBehaviour
             case var s when s == shotManager.flat || s == shotManager.flatServe:
                 SoundManager.Instance.PlayClip("soft_hit");
                 break;
-            case var s when s == shotManager.topSpin || s == shotManager.kickServe:
+            case var s when s == shotManager.topSpin || s == shotManager.topSpinServe:
                 SoundManager.Instance.PlayClip("hard_hit");
                 break;
         }

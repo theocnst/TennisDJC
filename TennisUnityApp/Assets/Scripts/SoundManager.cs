@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
 
     private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
     private AudioSource[] audioSources;
-    private int sourceCount = 5;
+    private int sourceCount = 7;
 
     void Awake()
     {
@@ -31,25 +31,56 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < sourceCount; i++)
         {
             AudioSource source = gameObject.AddComponent<AudioSource>();
+            source.loop = true; // Set loop to true for all sources
             audioSources[i] = source;
         }
     }
 
     private void LoadAudioClips()
     {
-        // Load and assign audio clips to the dictionary
         audioClips["soft_hit"] = Resources.Load<AudioClip>("soft_hit");
-        // Add more clips as needed
+        audioClips["hard_hit"] = Resources.Load<AudioClip>("hard_hit");
+        audioClips["footsteps"] = Resources.Load<AudioClip>("footsteps");
+        audioClips["ball_bounce"] = Resources.Load<AudioClip>("ball_bounce");
+        audioClips["net_hit"] = Resources.Load<AudioClip>("net_hit");
+        audioClips["background_music"] = Resources.Load<AudioClip>("background_music");
+        audioClips["ambient_park"] = Resources.Load<AudioClip>("ambient_park");
     }
-
-    public void PlayClip(string clipName, float volume)
+    public void PlayClip(string clipName)
     {
         if (audioClips.TryGetValue(clipName, out AudioClip clip))
         {
             AudioSource availableSource = FindAvailableSource();
             if (availableSource != null)
             {
-                availableSource.PlayOneShot(clip, volume);
+                availableSource.PlayOneShot(clip);
+            }
+        }
+    }
+
+    public void PlayLoop(string clipName)
+    {
+        if (audioClips.TryGetValue(clipName, out AudioClip clip))
+        {
+            AudioSource availableSource = FindAvailableSource();
+            if (availableSource != null && !availableSource.isPlaying)
+            {
+                availableSource.clip = clip;
+                availableSource.Play();
+            }
+        }
+    }
+
+    public void StopLoop(string clipName)
+    {
+        if (audioClips.TryGetValue(clipName, out AudioClip clip))
+        {
+            foreach (AudioSource source in audioSources)
+            {
+                if (source.clip == clip && source.isPlaying)
+                {
+                    source.Stop();
+                }
             }
         }
     }

@@ -6,10 +6,10 @@ public class PlayerHitting : MonoBehaviour
     public Transform aimTarget;
     public Transform ball;
     public bool IsHitting { get; private set; }
-    ShotManager shotManager;
-    Shot currentShot;
-    [SerializeField] Transform serveLeft;
-    [SerializeField] Transform serveRight;
+    private ShotManager shotManager;
+    private Shot currentShot;
+    [SerializeField] private Transform serveLeft;
+    [SerializeField] private Transform serveRight;
     public bool isServingLeft = true;
 
     private void Start()
@@ -20,72 +20,92 @@ public class PlayerHitting : MonoBehaviour
 
     void Update()
     {
-        IsHitting = false;
+        HandleHittingInput();
+        HandleServingInput();
+    }
 
-        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.E))
+    private void HandleHittingInput()
+    {
+        IsHitting = Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.E);
+
+        if (IsHitting)
         {
-            IsHitting = true;
             currentShot = Input.GetKeyDown(KeyCode.F) ? shotManager.topSpin : shotManager.flat;
-            aimTarget.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * 3f * 2 * Time.deltaTime);
+            aimTarget.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * 6f * Time.deltaTime);
         }
 
         if (Input.GetKeyUp(KeyCode.F) || Input.GetKeyUp(KeyCode.E))
         {
-            IsHitting = false;
             ball.GetComponent<TennisBall>().hitter = "Character";
+            IsHitting = false;
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.T))
+    private void HandleServingInput()
+    {
+        IsHitting = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.T);
+
+        if (IsHitting)
         {
-            IsHitting = true;
             var playerAnimation = GetComponent<PlayerAnimation>();
             currentShot = Input.GetKeyDown(KeyCode.R) ? shotManager.flatServe : shotManager.kickServe;
-            aimTarget.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * 3f * 2 * Time.deltaTime);
+            aimTarget.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * 6f * Time.deltaTime);
             playerAnimation.PlayServePrepareAnimation();
         }
 
         if (Input.GetKeyUp(KeyCode.R) || Input.GetKeyUp(KeyCode.T))
         {
-            IsHitting = false;
             var playerAnimation = GetComponent<PlayerAnimation>();
-            ball.transform.position = transform.position + new Vector3(0.2f, 1, 0);
             Vector3 dir = aimTarget.position - transform.position;
+            ball.transform.position = transform.position + new Vector3(0.2f, 1, 0);
             ball.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
             ball.GetComponent<TennisBall>().hitter = "Character";
             ball.GetComponent<TennisBall>().playing = true;
             playerAnimation.PlayServeAnimation();
+            IsHitting = false;
         }
-
-
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("TennisBall"))
         {
-            Vector3 dir = aimTarget.position - transform.position;
-            other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
-
-            Vector3 ballDir = ball.position - transform.position;
-
-            var playerAnimation = GetComponent<PlayerAnimation>();
-            if (ballDir.x >= 0)
-                playerAnimation.PlayForehandAnimation();
-            else
-                playerAnimation.PlayBackhandAnimation();
-
-            ball.GetComponent<TennisBall>().hitter = "Character";
+            PlayHitEffect(currentShot);
+            HandleBallHit(other);
         }
+    }
+
+    private void PlayHitEffect(Shot shot)
+    {
+        switch (shot)
+        {
+            case var s when s == shotManager.flat || s == shotManager.flatServe:
+                SoundManager.Instance.PlayClip("soft_hit");
+                break;
+            case var s when s == shotManager.topSpin || s == shotManager.kickServe:
+                SoundManager.Instance.PlayClip("hard_hit");
+                break;
+        }
+    }
+
+    private void HandleBallHit(Collider ballCollider)
+    {
+        Vector3 dir = aimTarget.position - transform.position;
+        ballCollider.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
+
+        var playerAnimation = GetComponent<PlayerAnimation>();
+        Vector3 ballDir = ball.position - transform.position;
+        if (ballDir.x >= 0)
+            playerAnimation.PlayForehandAnimation();
+        else
+            playerAnimation.PlayBackhandAnimation();
+
+        ball.GetComponent<TennisBall>().hitter = "Character";
     }
 
     public void Reset()
     {
-        if (isServingLeft)
-            transform.position = serveLeft.position;
-        else
-            transform.position = serveRight.position;
-        
+        transform.position = isServingLeft ? serveLeft.position : serveRight.position;
         isServingLeft = !isServingLeft;
     }
 }

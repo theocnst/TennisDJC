@@ -11,6 +11,7 @@ public class AimTarget : MonoBehaviour
     void Start()
     {
         initialTargetPosition = transform.position; // Save the initial position of the ball
+        SoundManager.Instance.PlayLoop("background_music");
     }
 
     void Update()

@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         settingsPanel.SetActive(false);
+        SoundManager.Instance.PlayLoop("background_music");
     }
 
     public void PlayGame()

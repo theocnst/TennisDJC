@@ -32,6 +32,8 @@ public class TennisBall : MonoBehaviour
         {
             Debug.Log("playerGround");
 
+            SoundManager.Instance.PlayClip("ball_bounce");
+
             if (hitter == "Bot")
             {
                 botBounceCount++;
@@ -42,6 +44,8 @@ public class TennisBall : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("BotGround"))
         {
+            SoundManager.Instance.PlayClip("ball_bounce");
+
             if (hitter == "Character")
             {
                 characterBounceCount++;
@@ -55,17 +59,20 @@ public class TennisBall : MonoBehaviour
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             //transform.position = initialBallPosition;
 
+            SoundManager.Instance.PlayClip("net_hit");
+
+
             GameObject.Find("Character").GetComponent<PlayerHitting>().Reset();
 
             if (playing)
             {
                 if (hitter == "Character")
                 {
-                    characterScore++;
+                    botScore++;
                 }
                 else if (hitter == "Bot")
                 {
-                    botScore++;
+                    characterScore++;
                 }
 
                 playing = false;
@@ -76,6 +83,8 @@ public class TennisBall : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             //transform.position = initialBallPosition;
+
+            SoundManager.Instance.PlayClip("ball_bounce");
 
             GameObject.Find("Character").GetComponent<PlayerHitting>().Reset();
 
